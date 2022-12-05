@@ -3,40 +3,26 @@ package zigzag;
 import java.util.*;
 
 public class Direccion {
-    public int[] coordenada = new int[2];
-    String flecha = "";
+    public int fila, col;
+    public ArrayList<Direccion> direcciones = new ArrayList<>();
+    public boolean visited = false;
 
     public Direccion(int fila, int col){
-        this.coordenada[0] = fila;
-        this.coordenada[1] = col;
+        this.fila = fila;
+        this.col = col;
     }
 
-    public void setVerticalArriba(){
-        flecha = "Arriba";
+    public void addDireccion(int fila, int col){
+        Direccion nueva = new Direccion(fila, col);
+        direcciones.add(nueva);
     }
 
-    public void setVerticalAbajo(){
-        flecha = "Abajo";
-    }
-
-    public void setDiagonalDerechaArriba(){
-        flecha = "Diagonal Dercha Arriba";
-    }
-
-    public void setDiagonalIzquierdaAbajo(){
-        flecha = "Diagonoal Izquierda Abajo";
-    }
-
-    public void setDerecha(){
-        flecha = "Derecha";
-    }
-
-    public void setIzquierda(){
-        flecha = "Iquierda";
-    }
-
-    public boolean hasFlecha(){
-        return flecha == "";
+    public String toString(){
+        StringBuffer salida = new StringBuffer();
+        for(int i = 0; i < direcciones.size()-1; i++){
+            salida.append("["+fila+","+col+"]");
+        }
+        return salida.toString();
     }
     
 }

@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import zigzag.Direccion;
 import zigzag.ZigZag;;
 
 public class TestsAlvaro {
@@ -40,7 +41,23 @@ public class TestsAlvaro {
     }
 
     @Test
-    public void testEjemplo() {
+    public void testHasWay() {
+        int[][] matriz = {{1, 3, 1}, {2, 2, 2}, {3, 1, 3}};
+        
+        ZigZag prueba = new ZigZag();
+        Direccion flecha = new Direccion(0, 0);
+
+        ZigZag.numrows = 3;
+        ZigZag.numcols = 3;
+        ZigZag.max = 3;
+        ZigZag.min = 1;
+        prueba.makePath(matriz);
+
+        assertEquals("[1,0]",flecha.toString());
+    }
+
+    @Test
+    public void testEjemplo2() {
 
         String entradaTest = "1 3 1\n" +
                 "2 2 2\n" +
@@ -68,6 +85,7 @@ public class TestsAlvaro {
         ZigZag.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
+
 
     }
 

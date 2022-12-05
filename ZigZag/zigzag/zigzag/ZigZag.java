@@ -4,100 +4,349 @@ import java.util.*;
 
 import javax.print.DocFlavor.STRING;
 import javax.print.attribute.standard.NumberOfDocuments;
+import javax.swing.plaf.TextUI;
 
 public class ZigZag {
-    private static int numrows, numcols, numnodos;
+    public static int numrows, numcols, min, max = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        String line;
+        StringTokenizer data;
 
-        ArrayList<String> col = new ArrayList<>();
+        ArrayList<String> col;
         ArrayList<ArrayList<String>> row = new ArrayList<>();
 
-        String data = sc.nextLine();
-
         while (sc.hasNextLine()) {
-            col.add(sc.nextLine());
+            line = sc.nextLine();
+            data = new StringTokenizer(line);
+            col = new ArrayList<>();
+            while (data.hasMoreTokens()) {
+                int num = Integer.parseInt(data.nextToken());
+                if (num < min) {
+                    min = num;
+                } else if (num > max) {
+                    max = num;
+                }
+
+                col.add(String.valueOf(num));
+            }
+            numcols = col.size();
             row.add(col);
         }
 
         numrows = row.size();
-        numcols = col.size();
-        numnodos = numrows * numcols;
+
+        int matriz[][] = new int[numrows][numcols];
+
+        for (int i = 0; i < numrows; i++) {
+            for (int j = 0; j < numcols; j++) {
+                matriz[i][j] = Integer.parseInt(row.get(i).get(j));
+            }
+        }
+
+        int valor = 0;
 
     }
 
-    public void zizagVueltaAtras(ArrayList<ArrayList<String>> matriz, Direccion nodo, int fila, int col, int pos) {
-        if (pos == numnodos - 1) {
+    public void zizagVueltaAtras(int[][] matriz, Direccion nodo, int fila, int col, int pos) {
+        Direccion flecha = new Direccion(fila, col);
+        addWays(fila, col, matriz, flecha);
+    }
 
+    public void makePath(int[][] matriz){
+        for(int i = 0; i < numrows-1; i++){
+            for(int j = 0; j < numcols-1; j++){
+                Direccion flecha = new Direccion(i, j);
+                addWays(i, j, matriz, flecha);
+            }
         }
     }
 
-    public boolean hasWay(int fila, int col, ArrayList<ArrayList<String>> matriz) {
-        Direccion flecha = new Direccion(fila, col);
+    public void addWays(int fila, int col, int[][] matriz, Direccion flecha) {
         if (fila == 0 && col == 0) {
-            if (!flecha.hasFlecha()) {
-                if (Integer.parseInt(matriz.get(fila).get(col)) < Integer.parseInt(matriz.get(fila).get(col + 1))) {
-                    flecha.setDerecha();
-                    return true;
-                } else if (Integer.parseInt(matriz.get(fila).get(col)) < Integer
-                        .parseInt(matriz.get(fila + 1).get(col))) {
-                    flecha.setVerticalAbajo();
-                    return true;
-                } else {
-                    if (Integer.parseInt(matriz.get(fila).get(col + 1)) < Integer
-                            .parseInt(matriz.get(fila + 1).get(col))) {
-                        flecha.setVerticalAbajo();
-                        return true;
-                    } else {
-                        flecha.setDerecha();
-                        return true;
-                    }
+            if (matriz[fila][col] == max) {
+                if (min == matriz[fila][col + 1]) {
+                    flecha.addDireccion(fila, col + 1);
+                }
+                if (min == matriz[fila + 1][col]) {
+                    flecha.addDireccion(fila + 1, col);
+                }
+                if (min == matriz[fila + 1][col + 1]) {
+                    flecha.addDireccion(fila + 1, col + 1);
+                }
+            } else {
+                if (matriz[fila][col] < matriz[fila][col + 1]) {
+                    flecha.addDireccion(fila, col + 1);
+                } if(matriz[fila][col] < matriz[fila+1][col]) {
+                    flecha.addDireccion(fila+1, col);
+                }
+                if (matriz[fila][col] < matriz[fila + 1][col+1]) {
+                    flecha.addDireccion(fila + 1, col+1);
+                } 
+            }
+        } else if(col == 0){
+            if (matriz[fila][col] == max) {
+                if (min == matriz[fila+1][col]) {
+                    flecha.addDireccion(fila+1, col);
+                }
+                if (min == matriz[fila-1][col]) {
+                    flecha.addDireccion(fila-1, col);
+                    ;
+                } 
+                if (min == matriz[fila][col+1]) {
+                    flecha.addDireccion(fila, col+1);
+                }
+                if (min == matriz[fila + 1][col + 1]) {
+                    flecha.addDireccion(fila + 1, col + 1);
+                }
+                if (min == matriz[fila - 1][col + 1]) {
+                    flecha.addDireccion(fila - 1, col + 1);
+                }
+            } else{
+                if (matriz[fila][col] < matriz[fila+1][col]) {
+                    flecha.addDireccion(fila+1, col);
+                }
+                if (matriz[fila][col] < matriz[fila-1][col]) {
+                    flecha.addDireccion(fila-1, col);
+                } 
+                if (matriz[fila][col] < matriz[fila][col+1]) {
+                    flecha.addDireccion(fila, col+1);
+                }
+                if (matriz[fila][col] < matriz[fila + 1][col + 1]) {
+                    flecha.addDireccion(fila + 1, col + 1);
+                }
+                if (matriz[fila][col] < matriz[fila - 1][col + 1]) {
+                    flecha.addDireccion(fila - 1, col + 1);
+                }
+            }
+        } else if(col == numrows-1){
+            if (matriz[fila][col] == max) {
+                if (min == matriz[fila+1][col]) {
+                    flecha.addDireccion(fila+1, col);
+                }
+                if (min == matriz[fila-1][col]) {
+                    flecha.addDireccion(fila-1, col);
+                    ;
+                } 
+                if (min == matriz[fila][col-1]) {
+                    flecha.addDireccion(fila, col-1);
+                }
+                if (min == matriz[fila + 1][col - 1]) {
+                    flecha.addDireccion(fila + 1, col - 1);
+                }
+                if (min == matriz[fila - 1][col + 1]) {
+                    flecha.addDireccion(fila - 1, col - 1);
+                }
+            } else{
+                if (matriz[fila][col] < matriz[fila+1][col]) {
+                    flecha.addDireccion(fila+1, col);
+                }
+                if (matriz[fila][col] < matriz[fila-1][col]) {
+                    flecha.addDireccion(fila-1, col);
+                } 
+                if (matriz[fila][col] < matriz[fila][col-1]) {
+                    flecha.addDireccion(fila, col-1);
+                }
+                if (matriz[fila][col] < matriz[fila + 1][col - 1]) {
+                    flecha.addDireccion(fila + 1, col - 1);
+                }
+                if (matriz[fila][col] < matriz[fila - 1][col - 1]) {
+                    flecha.addDireccion(fila - 1, col - 1);
+                }
+            }
+        } else if(fila == 0){
+            if (matriz[fila][col] == max) {
+                if (min == matriz[fila+1][col]) {
+                    flecha.addDireccion(fila+1, col);
+                }
+                if (min == matriz[fila][col-1]) {
+                    flecha.addDireccion(fila, col-1);
+                } 
+                if (min == matriz[fila][col+1]) {
+                    flecha.addDireccion(fila, col+1);
+                }
+                if (min == matriz[fila + 1][col - 1]) {
+                    flecha.addDireccion(fila + 1, col - 1);
+                }
+                if (min == matriz[fila + 1][col + 1]) {
+                    flecha.addDireccion(fila + 1, col + 1);
+                }
+            } else{
+                if (matriz[fila][col] < matriz[fila+1][col]) {
+                    flecha.addDireccion(fila+1, col);
+                }
+                if (matriz[fila][col] < matriz[fila][col-1]) {
+                    flecha.addDireccion(fila, col-1);
+                }
+                if (matriz[fila][col] < matriz[fila][col+1]) {
+                    flecha.addDireccion(fila, col+1);
+                }
+                if (matriz[fila][col] < matriz[fila + 1][col - 1]) {
+                    flecha.addDireccion(fila + 1, col - 1);
+                }
+                if (matriz[fila][col] < matriz[fila + 1][col + 1]) {
+                    flecha.addDireccion(fila + 1, col + 1);
+                }
+            }
+        }else if(fila == numrows-1){
+            if (matriz[fila][col] == max) {
+                if (min == matriz[fila-1][col]) {
+                    flecha.addDireccion(fila-1, col);
+                }
+                if (min == matriz[fila][col-1]) {
+                    flecha.addDireccion(fila, col-1);
+                } 
+                if (min == matriz[fila][col+1]) {
+                    flecha.addDireccion(fila, col+1);
+                }
+                if (min == matriz[fila + 1][col - 1]) {
+                    flecha.addDireccion(fila - 1, col - 1);
+                }
+                if (min == matriz[fila + 1][col + 1]) {
+                    flecha.addDireccion(fila - 1, col + 1);
+                }
+            } else{
+                if (matriz[fila][col] < matriz[fila-1][col]) {
+                    flecha.addDireccion(fila-1, col);
+                }
+                if (matriz[fila][col] < matriz[fila][col-1]) {
+                    flecha.addDireccion(fila, col-1);
+                }
+                if (matriz[fila][col] < matriz[fila][col+1]) {
+                    flecha.addDireccion(fila, col+1);
+                }
+                if (matriz[fila][col] < matriz[fila - 1][col - 1]) {
+                    flecha.addDireccion(fila - 1, col - 1);
+                }
+                if (matriz[fila][col] < matriz[fila - 1][col + 1]) {
+                    flecha.addDireccion(fila - 1, col + 1);
                 }
             }
         } else if (fila == numrows - 1 && col == 0) {
-            if (!flecha.hasFlecha()) {
-                if (Integer.parseInt(matriz.get(fila).get(col)) < Integer.parseInt(matriz.get(fila + 1).get(col))) {
-                    flecha.setVerticalArriba();
-                    return true;
-                } else if (Integer.parseInt(matriz.get(fila).get(col)) < Integer
-                        .parseInt(matriz.get(fila).get(col + 1))) {
-                    flecha.setDerecha();
-                    return true;
-                } else {
-                    if (Integer.parseInt(matriz.get(fila + 1).get(col)) < Integer
-                            .parseInt(matriz.get(fila + 1).get(col + 1))) {
-                        flecha.setVerticalArriba();
-                        return true;
-                    } else {
-                        flecha.setDerecha();
-                        return true;
-                    }
+            if (matriz[fila][col] == max) {
+                if (min == matriz[fila - 1][col]) {
+                    flecha.addDireccion(fila - 1, col);
+                } 
+                if (min == matriz[fila - 1][col + 1]) {
+                    flecha.addDireccion(fila - 1, col + 1);
+                    ;
+                } 
+                if (min == matriz[fila][col + 1]) {
+                    flecha.addDireccion(fila, col + 1);
                 }
-            } else if (fila == numrows - 1 && col == numcols - 1) {
-                if (!flecha.hasFlecha()) {
-                    if (Integer.parseInt(matriz.get(fila).get(col)) < Integer.parseInt(matriz.get(fila + 1).get(col))) {
-                        flecha.setVerticalArriba();
-                        return true;
-                    } else if (Integer.parseInt(matriz.get(fila).get(col)) < Integer
-                            .parseInt(matriz.get(fila).get(col + 1))) {
-                        flecha.setDerecha();
-                        return true;
-                    } else {
-                        if (Integer.parseInt(matriz.get(fila + 1).get(col)) < Integer
-                                .parseInt(matriz.get(fila + 1).get(col + 1))) {
-                            flecha.setVerticalArriba();
-                            return true;
-                        } else {
-                            flecha.setDerecha();
-                            return true;
-                        }
-                    }
+
+            } else{
+                if (matriz[fila][col] < matriz[fila - 1][col]) {
+                    flecha.addDireccion(fila - 1, col);
+                } 
+                if (matriz[fila][col] < matriz[fila - 1][col + 1]) {
+                    flecha.addDireccion(fila - 1, col + 1);
+                } 
+                if (matriz[fila][col] < matriz[fila][col + 1]) {
+                    flecha.addDireccion(fila, col + 1);
+                } 
+            }
+        } else if (fila == 0 && col == numcols - 1) {
+            if (matriz[fila][col] == max) {
+                if (min == matriz[fila][col - 1]) {
+                    flecha.addDireccion(fila, col - 1);
+                } 
+                if (min == matriz[fila + 1][col - 1]) {
+                    flecha.addDireccion(fila + 1, col - 1);
+                } 
+                if (min == matriz[fila + 1][col]) {
+                    flecha.addDireccion(fila + 1, col);
+                }
+
+            } else{
+                if (matriz[fila][col] < matriz[fila][col - 1]) {
+                    flecha.addDireccion(fila, col - 1);
+                } 
+                if (matriz[fila][col] < matriz[fila + 1][col - 1]) {
+                    flecha.addDireccion(fila + 1, col - 1);
+                } 
+                if (matriz[fila][col] < matriz[fila + 1][col]) {
+                    flecha.addDireccion(fila + 1, col + 1);
                 }
             }
 
-            return false;
+        } else if (fila == numrows - 1 && col == numcols - 1) {
+            if (matriz[fila][col] == max) {
+                if (min == matriz[fila][col - 1]) {
+                    flecha.addDireccion(fila, col - 1);
+                } 
+                if (min == matriz[fila - 1][col - 1]) {
+                    flecha.addDireccion(fila - 1, col - 1);
+                } 
+                if (min == matriz[fila - 1][col]) {
+                    flecha.addDireccion(fila - 1, col);
+                }
+
+            } else{
+                if (matriz[fila][col] < matriz[fila][col - 1]) {
+                    flecha.addDireccion(fila, col - 1);
+                } 
+                if (matriz[fila][col] < matriz[fila - 1][col - 1]) {
+                    flecha.addDireccion(fila - 1, col - 1);
+                } 
+                if (matriz[fila][col] < matriz[fila - 1][col]) {
+                    flecha.addDireccion(fila - 1, col);
+                } 
+            }
+        } else {
+            if (matriz[fila][col] == max) {
+                if (min == matriz[fila][col - 1]) {
+                    flecha.addDireccion(fila, col - 1);
+                } 
+                if (min == matriz[fila][col + 1]) {
+                    flecha.addDireccion(fila, col + 1);
+                } 
+                if (min == matriz[fila - 1][col]) {
+                    flecha.addDireccion(fila - 1, col);
+                } 
+                if (min == matriz[fila + 1][col]) {
+                    flecha.addDireccion(fila + 1, col);
+                } 
+                if (min == matriz[fila - 1][col + 1]) {
+                    flecha.addDireccion(fila - 1, col + 1);
+                } 
+                if (min == matriz[fila + 1][col + 1]) {
+                    flecha.addDireccion(fila + 1, col + 1);
+                } 
+                if (min == matriz[fila - 1][col - 1]) {
+                    flecha.addDireccion(fila - 1, col - 1);
+                } 
+                if (min == matriz[fila + 1][col - 1]) {
+                    flecha.addDireccion(fila + 1, col - 1);
+                }
+
+            } else{
+                if (matriz[fila][col] < matriz[fila][col - 1]) {
+                    flecha.addDireccion(fila, col - 1);
+                } 
+                if (matriz[fila][col] < matriz[fila][col + 1]) {
+                    flecha.addDireccion(fila, col + 1);
+                } 
+                if (matriz[fila][col] < matriz[fila - 1][col]) {
+                    flecha.addDireccion(fila - 1, col);
+                } 
+                if (matriz[fila][col] < matriz[fila + 1][col]) {
+                    flecha.addDireccion(fila + 1, col);
+                } 
+                if (matriz[fila][col] < matriz[fila - 1][col + 1]) {
+                    flecha.addDireccion(fila - 1, col + 1);
+                } 
+                if (matriz[fila][col] < matriz[fila + 1][col + 1]) {
+                    flecha.addDireccion(fila + 1, col + 1);
+                } 
+                if (matriz[fila][col] < matriz[fila - 1][col - 1]) {
+                    flecha.addDireccion(fila - 1, col - 1);
+                } if (matriz[fila][col] < matriz[fila + 1][col - 1]) {
+                    flecha.addDireccion(fila + 1, col - 1);
+                } 
+            }
+            
         }
     }
-
 }
