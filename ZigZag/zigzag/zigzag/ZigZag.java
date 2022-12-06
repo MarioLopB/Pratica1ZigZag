@@ -47,7 +47,7 @@ public class ZigZag {
             soluciones.add(newsol);
             // Solucion parcial
         } else {
-            for (int i = 0; i < opciones.size() - 1; i++) {
+            for (int i = 1; i < opciones.size() - 1; i++) {
                 Direccion current = opciones.get(i);
                 // Si no ha sido visitado lo relaciona con un nodo
                 if (current.visited == 0) {
@@ -123,7 +123,7 @@ public class ZigZag {
     }
 
     public Direccion search(ArrayList<Direccion> list, int fila, int col) {
-        for (int i = 0; i < list.size() - 1; i++) {
+        for (int i = 0; i < list.size(); i++) {
             if (list.get(i).fila == fila && list.get(i).col == col) {
                 return list.get(i);
             }
