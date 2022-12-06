@@ -41,7 +41,9 @@ public class Main {
         partida.Max();
         partida.Min();
 
-        partida.zizagVueltaAtras();
+        if(partida.max != partida.min){
+            partida.zizagVueltaAtras();
+        }
         
         partida.imprimeSoluciones();
 

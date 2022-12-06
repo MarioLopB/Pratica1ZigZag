@@ -19,7 +19,8 @@ import javax.swing.plaf.TextUI;
 import javax.swing.text.TabableView;
 
 public class ZigZag {
-    private int numrows, numcols, min, max = 0;
+    private int numrows, numcols = 0;
+    public int min, max = 0;
     private ArrayList<Direccion> opciones, elegidos;
     private ArrayList<ArrayList<Direccion>> soluciones;
 
@@ -197,10 +198,12 @@ public class ZigZag {
     public void imprimeSoluciones() {
         System.out.println(soluciones.size());
 
-        for (int i = 0; i < soluciones.size(); i++) {
-            imprimeSolucion(soluciones.get(i));
-            if (i != soluciones.size() - 1) {
-                System.out.println("");
+        if(max!=min){
+            for (int i = 0; i < soluciones.size(); i++) {
+                imprimeSolucion(soluciones.get(i));
+                if (i != soluciones.size() - 1) {
+                    System.out.println("");
+                }
             }
         }
     }

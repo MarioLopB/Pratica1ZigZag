@@ -69,7 +69,6 @@ public class TestsAlvaro {
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
 
-
     }
 
     @Test
@@ -446,6 +445,7 @@ public class TestsAlvaro {
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
+
     @Test
     public void testEjemplo() {
         String entradaTest = "1 3 1\n";
@@ -503,7 +503,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -523,122 +523,123 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
+        Main.main(args);
+
+        assertEquals(salidaEsperadaTest, salidaRealTest.toString());
+    }
+
+    @Test
+    public void testEjemplo() {
+        String entradaTest = "1 2 1\n";
+        String salidaEsperadaTest = "1\n" +
+                "1-2-1\n";
+
+        InputStream nuevo_in = new ByteArrayInputStream(entradaTest.getBytes());
+        System.setIn(nuevo_in);
+        ByteArrayOutputStream salidaRealTest = new ByteArrayOutputStream();
+        PrintStream nuevo_out = new PrintStream(salidaRealTest);
+        System.setOut(nuevo_out);
+
+        String[] args = { "" };
         PuzzleZigzag.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
+
     @Test
-        public void testEjemplo() {
-                String entradaTest = "1 2 1\n";
-                String salidaEsperadaTest = "1\n" +
-                                "1-2-1\n";
+    public void testLinea() {
+        String entradaTest = "1 2 3 4 5 6 7 8 9\n";
+        String salidaEsperadaTest = "1\n" +
+                "1-2-3-4-5-6-7-8-9\n";
 
-                InputStream nuevo_in = new ByteArrayInputStream(entradaTest.getBytes());
-                System.setIn(nuevo_in);
-                ByteArrayOutputStream salidaRealTest = new ByteArrayOutputStream();
-                PrintStream nuevo_out = new PrintStream(salidaRealTest);
-                System.setOut(nuevo_out);
+        InputStream nuevo_in = new ByteArrayInputStream(entradaTest.getBytes());
+        System.setIn(nuevo_in);
+        ByteArrayOutputStream salidaRealTest = new ByteArrayOutputStream();
+        PrintStream nuevo_out = new PrintStream(salidaRealTest);
+        System.setOut(nuevo_out);
 
-                String[] args = { "" };
-                PuzzleZigzag.main(args);
+        String[] args = { "" };
+        PuzzleZigzag.main(args);
 
-                assertEquals(salidaEsperadaTest, salidaRealTest.toString());
-        }
+        assertEquals(salidaEsperadaTest, salidaRealTest.toString());
+    }
 
-        @Test
-        public void testLinea() {
-                String entradaTest = "1 2 3 4 5 6 7 8 9\n";
-                String salidaEsperadaTest = "1\n" +
-                                "1-2-3-4-5-6-7-8-9\n";
+    @Test
+    public void test3x3UnaSolucion() {
+        String entradaTest = "1 2 3\n" +
+                "6 5 4\n" +
+                "7 8 9\n";
+        String salidaEsperadaTest = "1\n" +
+                "1-2-3\n" +
+                "    |\n" +
+                "6-5-4\n" +
+                "|    \n" +
+                "7-8-9\n";
 
-                InputStream nuevo_in = new ByteArrayInputStream(entradaTest.getBytes());
-                System.setIn(nuevo_in);
-                ByteArrayOutputStream salidaRealTest = new ByteArrayOutputStream();
-                PrintStream nuevo_out = new PrintStream(salidaRealTest);
-                System.setOut(nuevo_out);
+        InputStream nuevo_in = new ByteArrayInputStream(entradaTest.getBytes());
+        System.setIn(nuevo_in);
+        ByteArrayOutputStream salidaRealTest = new ByteArrayOutputStream();
+        PrintStream nuevo_out = new PrintStream(salidaRealTest);
+        System.setOut(nuevo_out);
 
-                String[] args = { "" };
-                PuzzleZigzag.main(args);
+        String[] args = { "" };
+        PuzzleZigzag.main(args);
 
-                assertEquals(salidaEsperadaTest, salidaRealTest.toString());
-        }
+        assertEquals(salidaEsperadaTest, salidaRealTest.toString());
+    }
 
-        @Test
-        public void test3x3UnaSolucion() {
-                String entradaTest = "1 2 3\n" +
-                                "6 5 4\n" +
-                                "7 8 9\n";
-                String salidaEsperadaTest = "1\n" +
-                                "1-2-3\n" +
-                                "    |\n" +
-                                "6-5-4\n" +
-                                "|    \n" +
-                                "7-8-9\n";
+    @Test
+    public void test3x3() {
+        String entradaTest = "1 2 3\n" +
+                "6 5 4\n" +
+                "7 8 9\n";
+        String salidaEsperadaTest = "1\n" +
+                "1-2-3\n" +
+                "    |\n" +
+                "6-5-4\n" +
+                "|    \n" +
+                "7-8-9\n";
 
-                InputStream nuevo_in = new ByteArrayInputStream(entradaTest.getBytes());
-                System.setIn(nuevo_in);
-                ByteArrayOutputStream salidaRealTest = new ByteArrayOutputStream();
-                PrintStream nuevo_out = new PrintStream(salidaRealTest);
-                System.setOut(nuevo_out);
+        InputStream nuevo_in = new ByteArrayInputStream(entradaTest.getBytes());
+        System.setIn(nuevo_in);
+        ByteArrayOutputStream salidaRealTest = new ByteArrayOutputStream();
+        PrintStream nuevo_out = new PrintStream(salidaRealTest);
+        System.setOut(nuevo_out);
 
-                String[] args = { "" };
-                PuzzleZigzag.main(args);
+        String[] args = { "" };
+        PuzzleZigzag.main(args);
 
-                assertEquals(salidaEsperadaTest, salidaRealTest.toString());
-        }
+        assertEquals(salidaEsperadaTest, salidaRealTest.toString());
+    }
 
-        @Test
-        public void test3x3() {
-                String entradaTest = "1 2 3\n" +
-                                "6 5 4\n" +
-                                "7 8 9\n";
-                String salidaEsperadaTest = "1\n" +
-                                "1-2-3\n" +
-                                "    |\n" +
-                                "6-5-4\n" +
-                                "|    \n" +
-                                "7-8-9\n";
+    @Test
+    public void test5x5() {
+        String entradaTest = "1 2 6 7 6\n" +
+                "3 5 8 5 7\n" +
+                "4 9 4 8 4\n" +
+                "1 3 9 3 5\n" +
+                "2 1 2 6 7\n";
+        String salidaEsperadaTest = "1\n" +
+                "1-2 6-7 6\n" +
+                " / / / /|\n" +
+                "3 5 8 5 7\n" +
+                "|/ / / / \n" +
+                "4 9 4 8 4\n" +
+                " / / / /|\n" +
+                "1 3 9 3 5\n" +
+                "|/ / / / \n" +
+                "2 1-2 6-7\n";
 
-                InputStream nuevo_in = new ByteArrayInputStream(entradaTest.getBytes());
-                System.setIn(nuevo_in);
-                ByteArrayOutputStream salidaRealTest = new ByteArrayOutputStream();
-                PrintStream nuevo_out = new PrintStream(salidaRealTest);
-                System.setOut(nuevo_out);
+        InputStream nuevo_in = new ByteArrayInputStream(entradaTest.getBytes());
+        System.setIn(nuevo_in);
+        ByteArrayOutputStream salidaRealTest = new ByteArrayOutputStream();
+        PrintStream nuevo_out = new PrintStream(salidaRealTest);
+        System.setOut(nuevo_out);
 
-                String[] args = { "" };
-                PuzzleZigzag.main(args);
+        String[] args = { "" };
+        Main.main(args);
 
-                assertEquals(salidaEsperadaTest, salidaRealTest.toString());
-        }
-
-        @Test
-        public void test5x5() {
-                String entradaTest = "1 2 6 7 6\n" +
-                                "3 5 8 5 7\n" +
-                                "4 9 4 8 4\n" +
-                                "1 3 9 3 5\n" +
-                                "2 1 2 6 7\n";
-                String salidaEsperadaTest = "1\n" +
-                                "1-2 6-7 6\n" +
-                                " / / / /|\n" +
-                                "3 5 8 5 7\n" +
-                                "|/ / / / \n" +
-                                "4 9 4 8 4\n" +
-                                " / / / /|\n" +
-                                "1 3 9 3 5\n" +
-                                "|/ / / / \n" +
-                                "2 1-2 6-7\n";
-
-                InputStream nuevo_in = new ByteArrayInputStream(entradaTest.getBytes());
-                System.setIn(nuevo_in);
-                ByteArrayOutputStream salidaRealTest = new ByteArrayOutputStream();
-                PrintStream nuevo_out = new PrintStream(salidaRealTest);
-                System.setOut(nuevo_out);
-
-                String[] args = { "" };
-                Main.main(args);
-
-                assertEquals(salidaEsperadaTest, salidaRealTest.toString());
-        }
+        assertEquals(salidaEsperadaTest, salidaRealTest.toString());
+    }
 
 }
