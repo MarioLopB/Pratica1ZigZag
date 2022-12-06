@@ -8,8 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import zigzag.Direccion;
-import zigzag.ZigZag;;
+import zigzag.*;
 
 public class TestsAlvaro {
     private static InputStream in;
@@ -82,7 +81,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        ZigZag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
 

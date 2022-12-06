@@ -1,352 +1,208 @@
 package zigzag;
 
 import java.util.*;
+/*
+ * Opciones: casillas a elegir
+ * Selecionados: casillas elegidas. Solucion parcial.
+ * Soluciones: todas las soluciones.
+ * 
+ * Crear buscar casilla.
+ * Crear metodo para comprobar cruces.
+ * 
+ */
 
+import javax.lang.model.element.Element;
 import javax.print.DocFlavor.STRING;
+import javax.print.attribute.PrintRequestAttribute;
 import javax.print.attribute.standard.NumberOfDocuments;
 import javax.swing.plaf.TextUI;
+import javax.swing.text.TabableView;
 
 public class ZigZag {
-    public static int numrows, numcols, min, max = 0;
+    private int numrows, numcols, min, max = 0;
+    private ArrayList<Direccion> opciones, elegidos;
+    private ArrayList<ArrayList<Direccion>> soluciones;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String line;
-        StringTokenizer data;
-
-        ArrayList<String> col;
-        ArrayList<ArrayList<String>> row = new ArrayList<>();
-
-        while (sc.hasNextLine()) {
-            line = sc.nextLine();
-            data = new StringTokenizer(line);
-            col = new ArrayList<>();
-            while (data.hasMoreTokens()) {
-                int num = Integer.parseInt(data.nextToken());
-                if (num < min) {
-                    min = num;
-                } else if (num > max) {
-                    max = num;
-                }
-
-                col.add(String.valueOf(num));
-            }
-            numcols = col.size();
-            row.add(col);
-        }
-
-        numrows = row.size();
-
-        int matriz[][] = new int[numrows][numcols];
-
-        for (int i = 0; i < numrows; i++) {
-            for (int j = 0; j < numcols; j++) {
-                matriz[i][j] = Integer.parseInt(row.get(i).get(j));
-            }
-        }
-
-        int valor = 0;
-
+    public ZigZag(int min, int max, int numrows, int numcols) {
+        this.opciones = new ArrayList<>();
+        this.elegidos = new ArrayList<>();
+        this.soluciones = new ArrayList<>();
+        this.min = min;
+        this.max = max;
+        this.numrows = numrows;
+        this.numcols = numcols;
     }
 
-    public void zizagVueltaAtras(int[][] matriz, Direccion nodo, int fila, int col, int pos) {
-        Direccion flecha = new Direccion(fila, col);
-        addWays(fila, col, matriz, flecha);
-    }
+    public void zizagVueltaAtras() {
+        // Solucion total
+        if (elegidos.size() == opciones.size() && elegidos.size() == numrows * numcols
+                && opciones.get(opciones.size() - 1).fila == elegidos.get(opciones.size() - 1).fila
+                && opciones.get(opciones.size() - 1).col == elegidos.get(opciones.size() - 1).col) {
+            ArrayList<Direccion> newsol = new ArrayList<>();
 
-    public void makePath(int[][] matriz){
-        for(int i = 0; i < numrows-1; i++){
-            for(int j = 0; j < numcols-1; j++){
-                Direccion flecha = new Direccion(i, j);
-                addWays(i, j, matriz, flecha);
-            }
-        }
-    }
-
-    public void addWays(int fila, int col, int[][] matriz, Direccion flecha) {
-        if (fila == 0 && col == 0) {
-            if (matriz[fila][col] == max) {
-                if (min == matriz[fila][col + 1]) {
-                    flecha.addDireccion(fila, col + 1);
-                }
-                if (min == matriz[fila + 1][col]) {
-                    flecha.addDireccion(fila + 1, col);
-                }
-                if (min == matriz[fila + 1][col + 1]) {
-                    flecha.addDireccion(fila + 1, col + 1);
-                }
-            } else {
-                if (matriz[fila][col] < matriz[fila][col + 1]) {
-                    flecha.addDireccion(fila, col + 1);
-                } if(matriz[fila][col] < matriz[fila+1][col]) {
-                    flecha.addDireccion(fila+1, col);
-                }
-                if (matriz[fila][col] < matriz[fila + 1][col+1]) {
-                    flecha.addDireccion(fila + 1, col+1);
-                } 
-            }
-        } else if(col == 0){
-            if (matriz[fila][col] == max) {
-                if (min == matriz[fila+1][col]) {
-                    flecha.addDireccion(fila+1, col);
-                }
-                if (min == matriz[fila-1][col]) {
-                    flecha.addDireccion(fila-1, col);
-                    ;
-                } 
-                if (min == matriz[fila][col+1]) {
-                    flecha.addDireccion(fila, col+1);
-                }
-                if (min == matriz[fila + 1][col + 1]) {
-                    flecha.addDireccion(fila + 1, col + 1);
-                }
-                if (min == matriz[fila - 1][col + 1]) {
-                    flecha.addDireccion(fila - 1, col + 1);
-                }
-            } else{
-                if (matriz[fila][col] < matriz[fila+1][col]) {
-                    flecha.addDireccion(fila+1, col);
-                }
-                if (matriz[fila][col] < matriz[fila-1][col]) {
-                    flecha.addDireccion(fila-1, col);
-                } 
-                if (matriz[fila][col] < matriz[fila][col+1]) {
-                    flecha.addDireccion(fila, col+1);
-                }
-                if (matriz[fila][col] < matriz[fila + 1][col + 1]) {
-                    flecha.addDireccion(fila + 1, col + 1);
-                }
-                if (matriz[fila][col] < matriz[fila - 1][col + 1]) {
-                    flecha.addDireccion(fila - 1, col + 1);
-                }
-            }
-        } else if(col == numrows-1){
-            if (matriz[fila][col] == max) {
-                if (min == matriz[fila+1][col]) {
-                    flecha.addDireccion(fila+1, col);
-                }
-                if (min == matriz[fila-1][col]) {
-                    flecha.addDireccion(fila-1, col);
-                    ;
-                } 
-                if (min == matriz[fila][col-1]) {
-                    flecha.addDireccion(fila, col-1);
-                }
-                if (min == matriz[fila + 1][col - 1]) {
-                    flecha.addDireccion(fila + 1, col - 1);
-                }
-                if (min == matriz[fila - 1][col + 1]) {
-                    flecha.addDireccion(fila - 1, col - 1);
-                }
-            } else{
-                if (matriz[fila][col] < matriz[fila+1][col]) {
-                    flecha.addDireccion(fila+1, col);
-                }
-                if (matriz[fila][col] < matriz[fila-1][col]) {
-                    flecha.addDireccion(fila-1, col);
-                } 
-                if (matriz[fila][col] < matriz[fila][col-1]) {
-                    flecha.addDireccion(fila, col-1);
-                }
-                if (matriz[fila][col] < matriz[fila + 1][col - 1]) {
-                    flecha.addDireccion(fila + 1, col - 1);
-                }
-                if (matriz[fila][col] < matriz[fila - 1][col - 1]) {
-                    flecha.addDireccion(fila - 1, col - 1);
-                }
-            }
-        } else if(fila == 0){
-            if (matriz[fila][col] == max) {
-                if (min == matriz[fila+1][col]) {
-                    flecha.addDireccion(fila+1, col);
-                }
-                if (min == matriz[fila][col-1]) {
-                    flecha.addDireccion(fila, col-1);
-                } 
-                if (min == matriz[fila][col+1]) {
-                    flecha.addDireccion(fila, col+1);
-                }
-                if (min == matriz[fila + 1][col - 1]) {
-                    flecha.addDireccion(fila + 1, col - 1);
-                }
-                if (min == matriz[fila + 1][col + 1]) {
-                    flecha.addDireccion(fila + 1, col + 1);
-                }
-            } else{
-                if (matriz[fila][col] < matriz[fila+1][col]) {
-                    flecha.addDireccion(fila+1, col);
-                }
-                if (matriz[fila][col] < matriz[fila][col-1]) {
-                    flecha.addDireccion(fila, col-1);
-                }
-                if (matriz[fila][col] < matriz[fila][col+1]) {
-                    flecha.addDireccion(fila, col+1);
-                }
-                if (matriz[fila][col] < matriz[fila + 1][col - 1]) {
-                    flecha.addDireccion(fila + 1, col - 1);
-                }
-                if (matriz[fila][col] < matriz[fila + 1][col + 1]) {
-                    flecha.addDireccion(fila + 1, col + 1);
-                }
-            }
-        }else if(fila == numrows-1){
-            if (matriz[fila][col] == max) {
-                if (min == matriz[fila-1][col]) {
-                    flecha.addDireccion(fila-1, col);
-                }
-                if (min == matriz[fila][col-1]) {
-                    flecha.addDireccion(fila, col-1);
-                } 
-                if (min == matriz[fila][col+1]) {
-                    flecha.addDireccion(fila, col+1);
-                }
-                if (min == matriz[fila + 1][col - 1]) {
-                    flecha.addDireccion(fila - 1, col - 1);
-                }
-                if (min == matriz[fila + 1][col + 1]) {
-                    flecha.addDireccion(fila - 1, col + 1);
-                }
-            } else{
-                if (matriz[fila][col] < matriz[fila-1][col]) {
-                    flecha.addDireccion(fila-1, col);
-                }
-                if (matriz[fila][col] < matriz[fila][col-1]) {
-                    flecha.addDireccion(fila, col-1);
-                }
-                if (matriz[fila][col] < matriz[fila][col+1]) {
-                    flecha.addDireccion(fila, col+1);
-                }
-                if (matriz[fila][col] < matriz[fila - 1][col - 1]) {
-                    flecha.addDireccion(fila - 1, col - 1);
-                }
-                if (matriz[fila][col] < matriz[fila - 1][col + 1]) {
-                    flecha.addDireccion(fila - 1, col + 1);
-                }
-            }
-        } else if (fila == numrows - 1 && col == 0) {
-            if (matriz[fila][col] == max) {
-                if (min == matriz[fila - 1][col]) {
-                    flecha.addDireccion(fila - 1, col);
-                } 
-                if (min == matriz[fila - 1][col + 1]) {
-                    flecha.addDireccion(fila - 1, col + 1);
-                    ;
-                } 
-                if (min == matriz[fila][col + 1]) {
-                    flecha.addDireccion(fila, col + 1);
-                }
-
-            } else{
-                if (matriz[fila][col] < matriz[fila - 1][col]) {
-                    flecha.addDireccion(fila - 1, col);
-                } 
-                if (matriz[fila][col] < matriz[fila - 1][col + 1]) {
-                    flecha.addDireccion(fila - 1, col + 1);
-                } 
-                if (matriz[fila][col] < matriz[fila][col + 1]) {
-                    flecha.addDireccion(fila, col + 1);
-                } 
-            }
-        } else if (fila == 0 && col == numcols - 1) {
-            if (matriz[fila][col] == max) {
-                if (min == matriz[fila][col - 1]) {
-                    flecha.addDireccion(fila, col - 1);
-                } 
-                if (min == matriz[fila + 1][col - 1]) {
-                    flecha.addDireccion(fila + 1, col - 1);
-                } 
-                if (min == matriz[fila + 1][col]) {
-                    flecha.addDireccion(fila + 1, col);
-                }
-
-            } else{
-                if (matriz[fila][col] < matriz[fila][col - 1]) {
-                    flecha.addDireccion(fila, col - 1);
-                } 
-                if (matriz[fila][col] < matriz[fila + 1][col - 1]) {
-                    flecha.addDireccion(fila + 1, col - 1);
-                } 
-                if (matriz[fila][col] < matriz[fila + 1][col]) {
-                    flecha.addDireccion(fila + 1, col + 1);
-                }
+            for (int i = 0; i < elegidos.size() - 1; i++) {
+                newsol.add(new Direccion(elegidos.get(i).fila, elegidos.get(i).col, elegidos.get(i).num));
             }
 
-        } else if (fila == numrows - 1 && col == numcols - 1) {
-            if (matriz[fila][col] == max) {
-                if (min == matriz[fila][col - 1]) {
-                    flecha.addDireccion(fila, col - 1);
-                } 
-                if (min == matriz[fila - 1][col - 1]) {
-                    flecha.addDireccion(fila - 1, col - 1);
-                } 
-                if (min == matriz[fila - 1][col]) {
-                    flecha.addDireccion(fila - 1, col);
-                }
-
-            } else{
-                if (matriz[fila][col] < matriz[fila][col - 1]) {
-                    flecha.addDireccion(fila, col - 1);
-                } 
-                if (matriz[fila][col] < matriz[fila - 1][col - 1]) {
-                    flecha.addDireccion(fila - 1, col - 1);
-                } 
-                if (matriz[fila][col] < matriz[fila - 1][col]) {
-                    flecha.addDireccion(fila - 1, col);
-                } 
-            }
+            soluciones.add(newsol);
+            // Solucion parcial
         } else {
-            if (matriz[fila][col] == max) {
-                if (min == matriz[fila][col - 1]) {
-                    flecha.addDireccion(fila, col - 1);
-                } 
-                if (min == matriz[fila][col + 1]) {
-                    flecha.addDireccion(fila, col + 1);
-                } 
-                if (min == matriz[fila - 1][col]) {
-                    flecha.addDireccion(fila - 1, col);
-                } 
-                if (min == matriz[fila + 1][col]) {
-                    flecha.addDireccion(fila + 1, col);
-                } 
-                if (min == matriz[fila - 1][col + 1]) {
-                    flecha.addDireccion(fila - 1, col + 1);
-                } 
-                if (min == matriz[fila + 1][col + 1]) {
-                    flecha.addDireccion(fila + 1, col + 1);
-                } 
-                if (min == matriz[fila - 1][col - 1]) {
-                    flecha.addDireccion(fila - 1, col - 1);
-                } 
-                if (min == matriz[fila + 1][col - 1]) {
-                    flecha.addDireccion(fila + 1, col - 1);
+            for (int i = 0; i < opciones.size() - 1; i++) {
+                Direccion current = opciones.get(i);
+                // Si no ha sido visitado lo relaciona con un nodo
+                if (current.visited == 0) {
+                    Relacionar(current);
+                    // Si ha encontrado relacion, se añade a la solucion parcial y continua con ese
+                    // camino
+                    // Luego, independientemente de si ha encontrado solución o no, lo elimina de la
+                    // parcial y resetea su variable de visitado a 0
+                    if (current.visited != 0) {
+                        elegidos.add(current);
+                        zizagVueltaAtras();
+                        elegidos.remove(elegidos.size() - 1);
+                        current.visited = 0;
+                    }
                 }
 
-            } else{
-                if (matriz[fila][col] < matriz[fila][col - 1]) {
-                    flecha.addDireccion(fila, col - 1);
-                } 
-                if (matriz[fila][col] < matriz[fila][col + 1]) {
-                    flecha.addDireccion(fila, col + 1);
-                } 
-                if (matriz[fila][col] < matriz[fila - 1][col]) {
-                    flecha.addDireccion(fila - 1, col);
-                } 
-                if (matriz[fila][col] < matriz[fila + 1][col]) {
-                    flecha.addDireccion(fila + 1, col);
-                } 
-                if (matriz[fila][col] < matriz[fila - 1][col + 1]) {
-                    flecha.addDireccion(fila - 1, col + 1);
-                } 
-                if (matriz[fila][col] < matriz[fila + 1][col + 1]) {
-                    flecha.addDireccion(fila + 1, col + 1);
-                } 
-                if (matriz[fila][col] < matriz[fila - 1][col - 1]) {
-                    flecha.addDireccion(fila - 1, col - 1);
-                } if (matriz[fila][col] < matriz[fila + 1][col - 1]) {
-                    flecha.addDireccion(fila + 1, col - 1);
-                } 
             }
-            
+        }
+    }
+
+    // Crea una relacion con la anterior casilla.
+    public void Relacionar(Direccion current) {
+        Direccion previous = elegidos.get(elegidos.size() - 1);
+        int num = previous.num;
+
+        if (current.visited == 0) {
+            if (num == max) {
+                num = min;
+            } else {
+                num++;
+            }
+
+            if (current.num == num) {
+                if (current.fila == previous.fila && current.col == previous.col + 1) {
+                    // Izquierda
+                    current.setVisited(1);
+                } else if (current.fila == previous.fila - 1 && current.col == previous.col + 1) {
+                    // Diagonal Arriba Izquierda
+                    if (search(opciones, current.fila, current.col - 1).visited != 4
+                            && search(opciones, current.fila - 1, current.col).visited != 4) {
+                        current.setVisited(2);
+                    }
+                } else if (current.fila == previous.fila - 1 && current.col == previous.col) {
+                    // Arriba
+                    current.setVisited(3);
+                } else if (current.fila == previous.fila - 1 && current.col == previous.col - 1) {
+                    // Diagonal Arriba Derecha
+                    if (search(opciones, current.fila, current.col + 1).visited != 2
+                            && search(opciones, current.fila - 1, current.col).visited != 6) {
+                        current.setVisited(4);
+                    }
+                } else if (current.fila == previous.fila && current.col == previous.col - 1) {
+                    // Derecha
+                    current.setVisited(5);
+                } else if (current.fila == previous.fila + 1 && current.col == previous.col - 1) {
+                    // Diagonal Abajo Derecha
+                    if (search(opciones, current.fila, current.col + 1).visited != 8
+                            && search(opciones, current.fila + 1, current.col).visited != 4) {
+                        current.setVisited(6);
+                    }
+                } else if (current.fila == previous.fila + 1 && current.col == previous.col) {
+                    // Abajo
+                    current.setVisited(7);
+                } else if (current.fila == previous.fila + 1 && current.col == previous.col + 1) {
+                    // Diagonal Abajo Izquierda
+                    if (search(opciones, current.fila, current.col - 1).visited != 6
+                            && search(opciones, current.fila + 1, current.col).visited != 2) {
+                        current.setVisited(8);
+                    }
+                }
+            }
+        }
+    }
+
+    public Direccion search(ArrayList<Direccion> list, int fila, int col) {
+        for (int i = 0; i < opciones.size() - 1; i++) {
+            if (list.get(i).fila == fila && list.get(i).col == col) {
+                return list.get(i);
+            }
+        }
+
+        return null;
+    }
+
+    public void addElem(Direccion elem) {
+        opciones.add(elem);
+        if(elegidos.size()==0){
+            elegidos.add(elem);
+        }
+    }
+
+    public void imprimeSolucion(ArrayList<Direccion> sol) {
+        char[][] tabla = new char[(numrows * 2) - 1][(numcols * 2) - 1];
+        int counter = 0;
+        for (int i = 0; i < ((numrows * 2) - 1); i++) {
+            for (int j = 0; i < (numcols * 2) - 1; j++) {
+                tabla[i][j] = ' ';
+            }
+        }
+
+        for (int i = 0; i < (numrows * 2) - 1; i++) {
+            for (int j = 0; i < (numcols * 2) - 1; j++) {
+                if (i % 2 != 0 && j % 2 != 0) {
+                    tabla[i][j] = (char) opciones.get(counter).num;
+                    int n = opciones.get(counter).fila;
+                    int m = opciones.get(counter).col;
+
+                    switch (search(sol, n, m).visited) {
+                        case 1:
+                            tabla[i][j - 1] = '-';
+                            break;
+                        case 2:
+                            tabla[i - 1][j - 1] = '\\';
+                            break;
+                        case 3:
+                            tabla[i - 1][j] = '|';
+                            break;
+                        case 4:
+                            tabla[i - 1][j + 1] = '/';
+                            break;
+                        case 5:
+                            tabla[i][j + 1] = '-';
+                            break;
+                        case 6:
+                            tabla[i][j] = '\\';
+                            break;
+                        case 7:
+                            tabla[i][j] = '|';
+                            break;
+                        case 8:
+                            tabla[i][j] = '/';
+                            break;
+                    }
+
+                    counter++;
+                }
+            }
+        }
+
+        for (int i = 0; i < (numrows * 2) - 1; i++) {
+            for (int j = 0; i < (numcols * 2) - 1; j++) {
+                System.out.print(tabla[i][j]);
+            }
+            System.out.println("");
+        }
+    }
+
+    public void imprimeSoluciones() {
+        System.out.println(soluciones.size());
+
+        for (int i = 0; i < soluciones.size() - 1; i++) {
+            imprimeSolucion(soluciones.get(i));
+            if (i != soluciones.size() - 2) {
+                System.out.println("");
+            }
         }
     }
 }

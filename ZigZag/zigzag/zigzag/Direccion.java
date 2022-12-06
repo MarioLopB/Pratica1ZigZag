@@ -3,26 +3,18 @@ package zigzag;
 import java.util.*;
 
 public class Direccion {
+    public int num;
     public int fila, col;
-    public ArrayList<Direccion> direcciones = new ArrayList<>();
-    public boolean visited = false;
+    public int visited = 0;
 
-    public Direccion(int fila, int col){
+    public Direccion(int fila, int col, int num){
         this.fila = fila;
         this.col = col;
+        this.num = num;
     }
 
-    public void addDireccion(int fila, int col){
-        Direccion nueva = new Direccion(fila, col);
-        direcciones.add(nueva);
-    }
-
-    public String toString(){
-        StringBuffer salida = new StringBuffer();
-        for(int i = 0; i < direcciones.size()-1; i++){
-            salida.append("["+fila+","+col+"]");
-        }
-        return salida.toString();
+    public void setVisited(int visited){
+        this.visited = visited;
     }
     
 }
