@@ -7,7 +7,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String line;
         StringTokenizer data;
-        int min = 1;
+        int min = 0;
         int max = 0;
         int numrows, numcols = 0;
 
@@ -20,11 +20,6 @@ public class Main {
             col = new ArrayList<>();
             while (data.hasMoreTokens()) {
                 int num = Integer.parseInt(data.nextToken());
-                if (num < min) {
-                    min = num;
-                } else if (num > max) {
-                    max = num;
-                }
 
                 col.add(String.valueOf(num));
             }
@@ -34,7 +29,7 @@ public class Main {
 
         numrows = row.size();
 
-        ZigZag partida = new ZigZag(min, max, numrows, numcols);
+        ZigZag partida = new ZigZag(numrows, numcols);
 
         for (int i = 0; i < numrows; i++) {
             for (int j = 0; j < numcols; j++) {
@@ -42,6 +37,9 @@ public class Main {
                 partida.addElem(elem);
             }
         }
+
+        partida.Max();
+        partida.Min();
 
         partida.zizagVueltaAtras();
         

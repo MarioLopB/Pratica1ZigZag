@@ -40,22 +40,6 @@ public class TestsAlvaro {
     }
 
     @Test
-    public void testHasWay() {
-        int[][] matriz = {{1, 3, 1}, {2, 2, 2}, {3, 1, 3}};
-        
-        ZigZag prueba = new ZigZag();
-        Direccion flecha = new Direccion(0, 0);
-
-        ZigZag.numrows = 3;
-        ZigZag.numcols = 3;
-        ZigZag.max = 3;
-        ZigZag.min = 1;
-        prueba.makePath(matriz);
-
-        assertEquals("[1,0]",flecha.toString());
-    }
-
-    @Test
     public void testEjemplo2() {
 
         String entradaTest = "1 3 1\n" +
@@ -652,7 +636,7 @@ public class TestsAlvaro {
                 System.setOut(nuevo_out);
 
                 String[] args = { "" };
-                PuzzleZigzag.main(args);
+                Main.main(args);
 
                 assertEquals(salidaEsperadaTest, salidaRealTest.toString());
         }

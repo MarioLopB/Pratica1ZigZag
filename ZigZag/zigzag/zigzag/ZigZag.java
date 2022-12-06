@@ -23,12 +23,10 @@ public class ZigZag {
     private ArrayList<Direccion> opciones, elegidos;
     private ArrayList<ArrayList<Direccion>> soluciones;
 
-    public ZigZag(int min, int max, int numrows, int numcols) {
+    public ZigZag(int numrows, int numcols) {
         this.opciones = new ArrayList<>();
         this.elegidos = new ArrayList<>();
         this.soluciones = new ArrayList<>();
-        this.min = min;
-        this.max = max;
         this.numrows = numrows;
         this.numcols = numcols;
     }
@@ -82,40 +80,40 @@ public class ZigZag {
             }
 
             if (current.num == num) {
-                if (current.fila == previous.fila && current.col == previous.col + 1) {
-                    // Izquierda
-                    current.setVisited(1);
-                } else if (current.fila-1 == previous.fila && current.col-1 == previous.col) {
+                if (current.fila - 1 == previous.fila && current.col - 1 == previous.col) {
                     // Diagonal Arriba Izquierda
-                    if (search(opciones, current.fila, current.col - 1).visited != 4
-                            && search(opciones, current.fila - 1, current.col).visited != 4) {
-                        current.setVisited(2);
-                    }
-                } else if (current.fila-1 == previous.fila && current.col == previous.col) {
-                    // Arriba
-                    current.setVisited(3);
-                } else if (current.fila-1 == previous.fila && current.col+1 == previous.col) {
-                    // Diagonal Arriba Derecha
-                    if (search(opciones, current.fila, current.col + 1).visited != 2
+                    if (search(opciones, current.fila, current.col - 1).visited != 3
                             && search(opciones, current.fila - 1, current.col).visited != 6) {
-                        current.setVisited(4);
+                        current.setVisited(1);
                     }
-                } else if (current.fila == previous.fila && current.col+1 == previous.col) {
+                } else if (current.fila - 1 == previous.fila && current.col == previous.col) {
+                    // Arriba
+                    current.setVisited(2);
+                } else if (current.fila - 1 == previous.fila && current.col + 1 == previous.col) {
+                    // Diagonal Arriba Derecha
+                    if (search(opciones, current.fila, current.col + 1).visited != 1
+                            && search(opciones, current.fila - 1, current.col).visited != 8) {
+                        current.setVisited(3);
+                    }
+                } else if (current.fila == previous.fila && current.col == previous.col + 1) {
+                    // Izquierda
+                    current.setVisited(4);
+                } else if (current.fila == previous.fila && current.col + 1 == previous.col) {
                     // Derecha
                     current.setVisited(5);
-                } else if (current.fila+1 == previous.fila && current.col+1 == previous.col) {
-                    // Diagonal Abajo Derecha
-                    if (search(opciones, current.fila, current.col + 1).visited != 8
-                            && search(opciones, current.fila + 1, current.col).visited != 4) {
+                } else if (current.fila + 1 == previous.fila && current.col - 1 == previous.col) {
+                    // Diagonal Abajo Izquierda
+                    if (search(opciones, current.fila, current.col - 1).visited != 8
+                            && search(opciones, current.fila + 1, current.col).visited != 1) {
                         current.setVisited(6);
                     }
-                } else if (current.fila+1 == previous.fila && current.col == previous.col) {
+                } else if (current.fila + 1 == previous.fila && current.col == previous.col) {
                     // Abajo
                     current.setVisited(7);
-                } else if (current.fila+1 == previous.fila && current.col-1 == previous.col) {
-                    // Diagonal Abajo Izquierda
-                    if (search(opciones, current.fila, current.col - 1).visited != 6
-                            && search(opciones, current.fila + 1, current.col).visited != 2) {
+                } else if (current.fila + 1 == previous.fila && current.col + 1 == previous.col) {
+                    // Diagonal Abajo Derecha
+                    if (search(opciones, current.fila, current.col + 1).visited != 6
+                            && search(opciones, current.fila + 1, current.col).visited != 3) {
                         current.setVisited(8);
                     }
                 }
@@ -135,7 +133,7 @@ public class ZigZag {
 
     public void addElem(Direccion elem) {
         opciones.add(elem);
-        if(elegidos.size()==0){
+        if (elegidos.size() == 0) {
             elegidos.add(elem);
         }
     }
@@ -152,34 +150,34 @@ public class ZigZag {
         for (int i = 0; i < (numrows * 2) - 1; i++) {
             for (int j = 0; j < (numcols * 2) - 1; j++) {
                 if (i % 2 == 0 && j % 2 == 0) {
-                    tabla[i][j] = (char) (opciones.get(counter).num+48);
+                    tabla[i][j] = (char) (opciones.get(counter).num + 48);
                     int n = opciones.get(counter).fila;
                     int m = opciones.get(counter).col;
 
                     switch (search(sol, n, m).visited) {
                         case 1:
-                            tabla[i][j - 1] = '-';
+                            tabla[i-1][j - 1] = '\\';
                             break;
                         case 2:
-                            tabla[i - 1][j - 1] = '\\';
+                            tabla[i-1][j] = '|';
                             break;
                         case 3:
-                            tabla[i - 1][j] = '|';
+                            tabla[i-1][j+1] = '/';
                             break;
                         case 4:
-                            tabla[i - 1][j + 1] = '/';
+                            tabla[i][j-1] = '-';
                             break;
                         case 5:
-                            tabla[i][j + 1] = '-';
+                            tabla[i][j+1] = '-';
                             break;
                         case 6:
-                            tabla[i+1][j+1] = '\\';
+                            tabla[i+1][j-1] = '/';
                             break;
                         case 7:
                             tabla[i+1][j] = '|';
                             break;
                         case 8:
-                            tabla[i+1][j-1] = '/';
+                            tabla[i+1][j+1] = '\\';
                             break;
                     }
 
@@ -201,8 +199,27 @@ public class ZigZag {
 
         for (int i = 0; i < soluciones.size(); i++) {
             imprimeSolucion(soluciones.get(i));
-            if (i != soluciones.size()-1) {
+            if (i != soluciones.size() - 1) {
                 System.out.println("");
+            }
+        }
+    }
+
+    public int Max() {
+        for (int i = 0; i < opciones.size(); i++) {
+            if (opciones.get(i).num > this.max) {
+                this.max = opciones.get(i).num;
+            }
+        }
+
+        return max;
+    }
+
+    public void Min() {
+        this.min = opciones.get(0).num;
+        for (int i = 0; i < opciones.size(); i++) {
+            if (opciones.get(i).num < this.min) {
+                this.min = opciones.get(i).num;
             }
         }
     }

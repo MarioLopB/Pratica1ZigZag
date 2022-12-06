@@ -1,6 +1,3 @@
-package zigzag;
-
- 
 import static org.junit.Assert.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,6 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import zigzag.*;
 
 public class MainTestsAlicia {
 
@@ -55,7 +54,7 @@ public void test01_ElDelProfe() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -334,7 +333,7 @@ public void test13_M4x4_Min6Max9() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -3762,7 +3761,7 @@ public void testEnorme1_M10x10_Min2Max8() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
