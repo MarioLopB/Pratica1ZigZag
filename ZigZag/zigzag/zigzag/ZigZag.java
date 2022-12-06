@@ -40,14 +40,15 @@ public class ZigZag {
                 && opciones.get(opciones.size() - 1).col == elegidos.get(opciones.size() - 1).col) {
             ArrayList<Direccion> newsol = new ArrayList<>();
 
-            for (int i = 0; i < elegidos.size() - 1; i++) {
+            for (int i = 0; i < elegidos.size(); i++) {
                 newsol.add(new Direccion(elegidos.get(i).fila, elegidos.get(i).col, elegidos.get(i).num));
+                newsol.get(i).setVisited(elegidos.get(i).visited);
             }
 
             soluciones.add(newsol);
             // Solucion parcial
         } else {
-            for (int i = 1; i < opciones.size() - 1; i++) {
+            for (int i = 1; i < opciones.size(); i++) {
                 Direccion current = opciones.get(i);
                 // Si no ha sido visitado lo relaciona con un nodo
                 if (current.visited == 0) {
@@ -143,15 +144,15 @@ public class ZigZag {
         char[][] tabla = new char[(numrows * 2) - 1][(numcols * 2) - 1];
         int counter = 0;
         for (int i = 0; i < ((numrows * 2) - 1); i++) {
-            for (int j = 0; i < (numcols * 2) - 1; j++) {
+            for (int j = 0; j < ((numcols * 2) - 1); j++) {
                 tabla[i][j] = ' ';
             }
         }
 
         for (int i = 0; i < (numrows * 2) - 1; i++) {
-            for (int j = 0; i < (numcols * 2) - 1; j++) {
-                if (i % 2 != 0 && j % 2 != 0) {
-                    tabla[i][j] = (char) opciones.get(counter).num;
+            for (int j = 0; j < (numcols * 2) - 1; j++) {
+                if (i % 2 == 0 && j % 2 == 0) {
+                    tabla[i][j] = (char) (opciones.get(counter).num+48);
                     int n = opciones.get(counter).fila;
                     int m = opciones.get(counter).col;
 
@@ -172,13 +173,13 @@ public class ZigZag {
                             tabla[i][j + 1] = '-';
                             break;
                         case 6:
-                            tabla[i][j] = '\\';
+                            tabla[i+1][j+1] = '\\';
                             break;
                         case 7:
-                            tabla[i][j] = '|';
+                            tabla[i+1][j] = '|';
                             break;
                         case 8:
-                            tabla[i][j] = '/';
+                            tabla[i+1][j-1] = '/';
                             break;
                     }
 
@@ -188,7 +189,7 @@ public class ZigZag {
         }
 
         for (int i = 0; i < (numrows * 2) - 1; i++) {
-            for (int j = 0; i < (numcols * 2) - 1; j++) {
+            for (int j = 0; j < (numcols * 2) - 1; j++) {
                 System.out.print(tabla[i][j]);
             }
             System.out.println("");
@@ -198,9 +199,9 @@ public class ZigZag {
     public void imprimeSoluciones() {
         System.out.println(soluciones.size());
 
-        for (int i = 0; i < soluciones.size() - 1; i++) {
+        for (int i = 0; i < soluciones.size(); i++) {
             imprimeSolucion(soluciones.get(i));
-            if (i != soluciones.size() - 2) {
+            if (i != soluciones.size()-1) {
                 System.out.println("");
             }
         }
