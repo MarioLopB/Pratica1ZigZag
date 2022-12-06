@@ -84,34 +84,34 @@ public class ZigZag {
                 if (current.fila == previous.fila && current.col == previous.col + 1) {
                     // Izquierda
                     current.setVisited(1);
-                } else if (current.fila == previous.fila - 1 && current.col == previous.col + 1) {
+                } else if (current.fila-1 == previous.fila && current.col-1 == previous.col) {
                     // Diagonal Arriba Izquierda
                     if (search(opciones, current.fila, current.col - 1).visited != 4
                             && search(opciones, current.fila - 1, current.col).visited != 4) {
                         current.setVisited(2);
                     }
-                } else if (current.fila == previous.fila - 1 && current.col == previous.col) {
+                } else if (current.fila-1 == previous.fila && current.col == previous.col) {
                     // Arriba
                     current.setVisited(3);
-                } else if (current.fila == previous.fila - 1 && current.col == previous.col - 1) {
+                } else if (current.fila-1 == previous.fila && current.col+1 == previous.col) {
                     // Diagonal Arriba Derecha
                     if (search(opciones, current.fila, current.col + 1).visited != 2
                             && search(opciones, current.fila - 1, current.col).visited != 6) {
                         current.setVisited(4);
                     }
-                } else if (current.fila == previous.fila && current.col == previous.col - 1) {
+                } else if (current.fila == previous.fila && current.col+1 == previous.col) {
                     // Derecha
                     current.setVisited(5);
-                } else if (current.fila == previous.fila + 1 && current.col == previous.col - 1) {
+                } else if (current.fila+1 == previous.fila && current.col+1 == previous.col) {
                     // Diagonal Abajo Derecha
                     if (search(opciones, current.fila, current.col + 1).visited != 8
                             && search(opciones, current.fila + 1, current.col).visited != 4) {
                         current.setVisited(6);
                     }
-                } else if (current.fila == previous.fila + 1 && current.col == previous.col) {
+                } else if (current.fila+1 == previous.fila && current.col == previous.col) {
                     // Abajo
                     current.setVisited(7);
-                } else if (current.fila == previous.fila + 1 && current.col == previous.col + 1) {
+                } else if (current.fila+1 == previous.fila && current.col-1 == previous.col) {
                     // Diagonal Abajo Izquierda
                     if (search(opciones, current.fila, current.col - 1).visited != 6
                             && search(opciones, current.fila + 1, current.col).visited != 2) {
@@ -123,7 +123,7 @@ public class ZigZag {
     }
 
     public Direccion search(ArrayList<Direccion> list, int fila, int col) {
-        for (int i = 0; i < opciones.size() - 1; i++) {
+        for (int i = 0; i < list.size() - 1; i++) {
             if (list.get(i).fila == fila && list.get(i).col == col) {
                 return list.get(i);
             }
