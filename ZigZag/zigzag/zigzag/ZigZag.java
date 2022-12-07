@@ -1,22 +1,6 @@
 package zigzag;
 
 import java.util.*;
-/*
- * Opciones: casillas a elegir
- * Selecionados: casillas elegidas. Solucion parcial.
- * Soluciones: todas las soluciones.
- * 
- * Crear buscar casilla.
- * Crear metodo para comprobar cruces.
- * 
- */
-
-import javax.lang.model.element.Element;
-import javax.print.DocFlavor.STRING;
-import javax.print.attribute.PrintRequestAttribute;
-import javax.print.attribute.standard.NumberOfDocuments;
-import javax.swing.plaf.TextUI;
-import javax.swing.text.TabableView;
 
 public class ZigZag {
     private int numrows, numcols = 0;
@@ -24,6 +8,12 @@ public class ZigZag {
     private ArrayList<Direccion> opciones, elegidos;
     private ArrayList<ArrayList<Direccion>> soluciones;
 
+    /**
+     *Constructor de la clase ZigZag
+     *  
+     * @param numrows
+     * @param numcols
+     */
     public ZigZag(int numrows, int numcols) {
         this.opciones = new ArrayList<>();
         this.elegidos = new ArrayList<>();
@@ -32,6 +22,9 @@ public class ZigZag {
         this.numcols = numcols;
     }
 
+    /**
+     * Método por bactracking para encontrar todas las soluciones posibles.
+     */
     public void zizagVueltaAtras() {
         // Solucion total
         if (elegidos.size() == opciones.size() && elegidos.size() == numrows * numcols
@@ -68,7 +61,11 @@ public class ZigZag {
         }
     }
 
-    // Crea una relacion con la anterior casilla.
+    /**
+     * Crea una relacion con la anterior casilla en orden lexicográfico y teniendo en cuenta los cruzes.
+     * 
+     * @param current
+     */
     public void Relacionar(Direccion current) {
         Direccion previous = elegidos.get(elegidos.size() - 1);
         int num = previous.num;
@@ -80,7 +77,7 @@ public class ZigZag {
                 num++;
             }
 
-            if (current.num == num) {
+            if (current.num == num && current.num != previous.num) {
                 if (current.fila - 1 == previous.fila && current.col - 1 == previous.col) {
                     // Diagonal Arriba Izquierda
                     if (search(opciones, current.fila, current.col - 1).visited != 3
@@ -122,6 +119,14 @@ public class ZigZag {
         }
     }
 
+    /**
+     * Busca una casilla dentro de la lista indicada en función de sus coordenadas.
+     * 
+     * @param list
+     * @param fila
+     * @param col
+     * @return
+     */
     public Direccion search(ArrayList<Direccion> list, int fila, int col) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).fila == fila && list.get(i).col == col) {
@@ -132,6 +137,11 @@ public class ZigZag {
         return null;
     }
 
+    /**
+     * Añade un elemento a la lista de opciones.
+     * 
+     * @param elem
+     */
     public void addElem(Direccion elem) {
         opciones.add(elem);
         if (elegidos.size() == 0) {
@@ -139,6 +149,11 @@ public class ZigZag {
         }
     }
 
+    /**
+     * Imprime una solución.
+     * 
+     * @param sol
+     */
     public void imprimeSolucion(ArrayList<Direccion> sol) {
         char[][] tabla = new char[(numrows * 2) - 1][(numcols * 2) - 1];
         int counter = 0;
@@ -195,6 +210,9 @@ public class ZigZag {
         }
     }
 
+    /**
+     * Imprime todas las soluciones.
+     */
     public void imprimeSoluciones() {
         System.out.println(soluciones.size());
 
@@ -208,16 +226,21 @@ public class ZigZag {
         }
     }
 
-    public int Max() {
+    /**
+     * Establece el número maximo de la tabla.
+     */
+    public void Max() {
         for (int i = 0; i < opciones.size(); i++) {
             if (opciones.get(i).num > this.max) {
                 this.max = opciones.get(i).num;
             }
         }
-
-        return max;
     }
 
+
+    /**
+     * Establece el número máximo de la tabla.
+     */
     public void Min() {
         this.min = opciones.get(0).num;
         for (int i = 0; i < opciones.size(); i++) {
@@ -225,5 +248,47 @@ public class ZigZag {
                 this.min = opciones.get(i).num;
             }
         }
+    }
+
+    /**
+     * 
+     * @return true si la entrada es correcta.
+     */
+    public boolean isInputOk(){
+        if(numrows > 10){
+            return false;
+        } else if (numcols > 10){
+            return false;
+        }
+
+        for(int i = 0; i < opciones.size(); i++){
+            if(opciones.get(i).num > 9 || opciones.get(i).num <= 0){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 
+     * @param list
+     * @return true si el numero de columnas en las filas es el mismo.
+     */
+    public boolean isNumColEqual(ArrayList<ArrayList<String>> list){
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).size() != numcols){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+    /**
+     * @return tamaño de la lista de opciones.
+     */
+    public int getSizeOptions(){
+        return opciones.size();
     }
 }

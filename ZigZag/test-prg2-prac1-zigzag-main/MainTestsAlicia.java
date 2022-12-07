@@ -73,7 +73,7 @@ public void test02_LongitudUno() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -92,7 +92,7 @@ public void test03_LongitudUno() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -117,7 +117,7 @@ public void test04_Rectangular() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -136,7 +136,7 @@ public void test05_EvitarCruce_M3x3_9() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -160,7 +160,7 @@ public void test06_M3x3_4() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -182,7 +182,7 @@ public void test07_M2x2_4() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -203,7 +203,7 @@ public void test08_SoloUnNumero() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -231,7 +231,7 @@ public void test09_M4x4_Min2() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -256,7 +256,7 @@ public void test10_M3x2_Min2() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -279,7 +279,7 @@ public void test11_M2x3_Min2Max3_Cruzadas() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -298,7 +298,7 @@ public void test12_SinSolucion() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -352,7 +352,7 @@ public void testIncorrecto_01_unCero() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -371,7 +371,7 @@ public void testIncorrecto_02_unNumeroNegativo() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -390,7 +390,7 @@ public void testIncorrecto_03_unDiez() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -409,7 +409,7 @@ public void testIncorrecto_04_unNumeroMuyGrande() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -428,7 +428,7 @@ public void testIncorrecto_05_unaLetra() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -448,7 +448,7 @@ public void testIncorrecto_06_filasDistintaLongitud() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -468,7 +468,7 @@ public void testIncorrecto_07_filaVacia() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -488,7 +488,7 @@ public void testIncorrecto_08_filaConUnEspacio() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -516,7 +516,7 @@ public void testIncorrecto_09_muchasFilas() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }
@@ -534,7 +534,7 @@ public void testIncorrecto_10_muchasColumnas() {
 	PrintStream nuevo_out = new PrintStream(salidaRealTest);
 	System.setOut(nuevo_out);
 	
-	Principal.main(new String[0]);
+	Main.main(new String[0]);
 
    assertEquals(salidaEsperadaTest,salidaRealTest.toString());
 }

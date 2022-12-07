@@ -1,4 +1,3 @@
-package src;
 import static org.junit.Assert.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -8,7 +7,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MainTests {
+import zigzag.*;
+
+public class MainTestsGuillermo {
     private static InputStream in;
     private static PrintStream out;
 
@@ -23,6 +24,38 @@ public class MainTests {
     public void execAfter() throws Exception {
         System.setIn(in);
         System.setOut(out);
+    }
+
+    @Test
+    public void testEjemplo2() {
+
+        String entradaTest = "1 3 1\n" +
+                "2 2 2\n" +
+                "3 1 3";
+        String salidaEsperadaTest = "2\n" +
+                "1 3-1\n" +
+                "|/ / \n" +
+                "2 2 2\n" +
+                " / /|\n" +
+                "3-1 3\n" +
+                "\n" +
+                "1 3-1\n" +
+                "| | |\n" +
+                "2 2 2\n" +
+                "| | |\n" +
+                "3-1 3\n";
+
+        InputStream nuevo_in = new ByteArrayInputStream(entradaTest.getBytes());
+        System.setIn(nuevo_in);
+        ByteArrayOutputStream salidaRealTest = new ByteArrayOutputStream();
+        PrintStream nuevo_out = new PrintStream(salidaRealTest);
+        System.setOut(nuevo_out);
+
+        String[] args = { "" };
+        Main.main(args);
+
+        assertEquals(salidaEsperadaTest, salidaRealTest.toString());
+
     }
 
     @Test

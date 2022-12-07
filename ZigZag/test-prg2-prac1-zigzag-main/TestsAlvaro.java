@@ -84,7 +84,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        ZigZag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
 
@@ -106,7 +106,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        ZigZag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
 
@@ -128,7 +128,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
 
@@ -149,7 +149,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        ZigZag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -168,7 +168,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        ZigZag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -186,7 +186,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -204,7 +204,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -222,7 +222,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -240,7 +240,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -260,7 +260,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -280,7 +280,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -300,7 +300,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -320,7 +320,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -340,7 +340,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -361,7 +361,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -381,7 +381,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -401,7 +401,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -421,7 +421,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -441,13 +441,13 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
 
     @Test
-    public void testEjemplo() {
+    public void testEjemplo3() {
         String entradaTest = "1 3 1\n";
         String salidaEsperadaTest = "0\n";
 
@@ -458,7 +458,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -477,7 +477,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -541,7 +541,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -559,7 +559,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -583,7 +583,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
@@ -607,7 +607,7 @@ public class TestsAlvaro {
         System.setOut(nuevo_out);
 
         String[] args = { "" };
-        PuzzleZigzag.main(args);
+        Main.main(args);
 
         assertEquals(salidaEsperadaTest, salidaRealTest.toString());
     }
